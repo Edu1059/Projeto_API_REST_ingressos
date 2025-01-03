@@ -1,3 +1,4 @@
+const jwt = require('jsonwebtoken');
 const UsuarioModel = require('../model/UsuarioModel.js');
 
 require('dotenv').config();
@@ -37,16 +38,28 @@ class UsuarioController {
 
     async loginUsuario (req, res) {
 
-        const {nome, senha} = req.body;
+        const {nome, senha, admin} = req.body;
 
         const usuarioExiste = await UsuarioModel.findOne({nome: nome, senha: senha});
         
-        
-        if(!usuarioExiste) {
-            return res.status(404).json({msg: "Usuário não encontrado"});
-        } 
-            
-        return res.status(200).json({msg: "Usuario logado com sucesso", nome: nome, senha: senha}); 
+        try {
+           
+            if(!usuarioExiste) {
+                return res.status(404).json({msg: "Usuário não encontrado"});
+            } else {
+                const secret = process.env.SECRET;
+                const token = jwt.sign({
+                    _id: usuarioExiste._id,
+                    nome,
+                    admin: usuarioExiste.admin,
+                }, secret);
+                
+                return res.status(200).json({msg: "Usuario logado com sucesso", nome: nome, senha: senha, token});
+            }
+
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
     }
 }
 
