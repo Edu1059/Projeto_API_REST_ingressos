@@ -3,6 +3,8 @@ const express = require('express')
 const app = express()
 const router = require('./routes')
 
+require('./config/connection.js');
+
 app.use(express.json())
 app.use(router)
 
