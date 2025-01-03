@@ -40,7 +40,7 @@ class UsuarioController {
 
         const {nome, senha, admin} = req.body;
 
-        const usuarioExiste = await UsuarioModel.findOne({nome: nome, senha: senha});
+        const usuarioExiste = await UsuarioModel.findOne({nome: nome, senha: senha, admin: admin});
         
         try {
            
