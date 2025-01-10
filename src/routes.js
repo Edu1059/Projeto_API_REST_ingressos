@@ -10,11 +10,15 @@ const tokenAdmin = require('./middleware/tokenAdmin.js');
 const router = express.Router()
 
 router.get('/', (req, res) => {
-    return res.send('Bem-vindo ao Sistema de vendas de ingressos');
+    return res.render("inicial", {message: "Bem-vindo ao sistema de vendas de ingressos 2025"})
 });
 
 router.get('/usuario', UsuarioController.getUsuarios)
+
+router.get('/usuario/create', (req, res) => { res.render("create") })
 router.post('/usuario/create', UsuarioController.createUsuario)
+
+router.get('/usuario/login', (req, res) => { res.render("login") })
 router.post('/usuario/login', UsuarioController.loginUsuario)
 
 router.get('/ingresso/', IngressoController.getIngresso);

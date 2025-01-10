@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+    <h2>Login de Usuário</h2>
+
+    <form action="/usuario/login" method="POST">
+        <label for="nome">Usuário:</label>
+        <input type="text" id="nome" name="nome" required>
+        <br>
+        <label for="senha">Senha:</label>
+        <input type="password" id="senha" name="senha" required>
+        <br>
+        <label for="admin">Escolha suas opções:</label>
+        <select id="admin" name="admin">
+            <option value="true">True</option>
+            <option value="false">False</option>
+        </select>
+        <button type="submit">Entrar</button>
+    </form>
+
+    {{#logged}}
+        <p style="color: green;">Login realizado com sucesso</p>
+    {{/logged}}
+
+    {{#info}}
+        <p style="color: red;">Credenciais inválidas</p>
+    {{/info}}
+
+    {{#token}}
+        Token
+        <textarea rows="5" cols="50">{{.}}</textarea>
+    {{/token}}
+    
+    <br>
+    <a href="/">Voltar</a>
+</body>
+</html>

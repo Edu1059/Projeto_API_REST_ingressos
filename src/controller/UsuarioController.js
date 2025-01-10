@@ -15,12 +15,12 @@ class UsuarioController {
     async createUsuario (req, res) {
 
         const {nome, senha, admin} = req.body;
-
+        
         try {
             
             if(await UsuarioModel.findOne({nome: nome})) {
-
-                return res.status(400).json({msg: "Usuário já existe"});
+                const mensagemErro = `Usuário ${nome} já existe`
+                res.render("create", {mensagemErro})
 
             } else {
                 const usuarioCriado = await UsuarioModel.create({
@@ -28,7 +28,9 @@ class UsuarioController {
                     senha: senha,
                     admin: admin
                 });
-                return res.status(200).json(usuarioCriado);
+
+                const created = true
+                res.render("create", {message: "Cadastro de Usuário", created: created, nome: nome, senha: senha, admin: admin})
             }
             
         } catch (error) {
@@ -39,13 +41,14 @@ class UsuarioController {
     async loginUsuario (req, res) {
 
         const {nome, senha, admin} = req.body;
+        const logged = true;
 
         const usuarioExiste = await UsuarioModel.findOne({nome: nome, senha: senha, admin: admin});
         
         try {
            
             if(!usuarioExiste) {
-                return res.status(404).json({msg: "Usuário não encontrado"});
+                res.render("login", {info: `Usuário não existe`})
             } else {
                 const secret = process.env.SECRET;
                 const token = jwt.sign({
@@ -54,7 +57,7 @@ class UsuarioController {
                     admin: usuarioExiste.admin,
                 }, secret);
                 
-                return res.status(200).json({msg: "Usuario logado com sucesso", nome: nome, senha: senha, token});
+                res.render("login", {message: "Login de Usuário", nome: nome, senha: senha, token: token, logged: logged})
             }
 
         } catch (error) {
