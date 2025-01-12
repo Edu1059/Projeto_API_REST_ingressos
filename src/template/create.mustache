@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
 </head>
 <body>
@@ -11,17 +9,18 @@
     <form action="/usuario/create" method="POST">
         <label for="nome">Usuário:</label>
         <input type="text" id="nome" name="nome" required>
-        <br>
+        <br><br>
         <label for="senha">Senha:</label>
         <input type="password" id="senha" name="senha" required>
-        <br>
-        <label for="admin">Escolha suas opções:</label>
+        <br><br>
+        <label for="admin">Você é admin ?</label>
         <select id="admin" name="admin">
             <option value="true">True</option>
             <option value="false">False</option>
         </select>
+        <br><br> 
         <button type="submit">Cadastrar</button>
-        <br>
+        <br><br>
 
         {{#mensagemErro}}
             <p style="color: red;">{{.}}</p>
@@ -33,6 +32,6 @@
 
     </form>
 
-    <a href="/">Voltar</a>
+    <a href="/inicio" style="text-decoration: none;">Voltar</a>
 </body>
 </html>

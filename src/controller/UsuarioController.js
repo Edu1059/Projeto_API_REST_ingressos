@@ -23,7 +23,7 @@ class UsuarioController {
                 res.render("create", {mensagemErro})
 
             } else {
-                const usuarioCriado = await UsuarioModel.create({
+                await UsuarioModel.create({
                     nome: nome,
                     senha: senha,
                     admin: admin
@@ -57,7 +57,7 @@ class UsuarioController {
                     admin: usuarioExiste.admin,
                 }, secret);
                 
-                res.render("login", {message: "Login de Usuário", nome: nome, senha: senha, token: token, logged: logged})
+                res.render("login", {message: "Login de Usuário", nome: nome, senha: senha, token: token, logged: logged, id: usuarioExiste.id})
             }
 
         } catch (error) {

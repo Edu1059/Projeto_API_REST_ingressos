@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Ingressos</title>
+</head>
+<body>
+
+    <h1>Busca ingresso</h1>
+    <br>
+
+    <form action="/compra/busca/" method="POST">
+        <label for="id">Id compra:</label>
+        <input type="text" id="id" name="id" placeholder="Insira o ID do ingresso" required>
+        <button type="submit">Consultar ingresso</button>
+    </form>
+    <br>
+
+    <hr style="margin-right: 80%;">
+
+    {{#message}}
+        {{.}}
+        <hr style="margin-right: 80%;">
+        <br>
+    {{/message}}
+    
+    {{#ingresso}}
+        <ul>
+            <li><b>id_compra</b>: {{ingresso._id}} <br>
+                <b>tipo_ingresso</b>: {{ingresso.tipo}} <br> 
+                <b>quantidade_comprada</b>: {{ingresso.quantidadeComprada}}
+            </li><br>
+        </ul>
+        <hr style="margin-right: 80%;">
+        <br>
+        <a href="/compra/busca/{{ingresso.id_comprador}}" style="text-decoration: none;">Voltar aos ingressos</a><br>
+    {{/ingresso}} 
+
+    <a href="/usuario/login" style="text-decoration: none;">Voltar ao login</a><br>
+    <a href="/inicio" style="text-decoration: none;">Voltar ao início<a>    
+
+</body>
+</html>

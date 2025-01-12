@@ -8,7 +8,7 @@ class IngressoController {
 
         return res.status(200).json(ingressos);
     }
-
+    
     async createIngresso (req, res) {
 
         const {nome, preco, quantidade, tipo} = req.body;

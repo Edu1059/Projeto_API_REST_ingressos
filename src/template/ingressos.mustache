@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Ingressos</title>
+</head>
+<body>
+
+    <h1>Ingressos comprados pelo usuário {{usuario.nome}}</h1>
+    
+    <a href= "/compra/busca" style="text-decoration: none;">Consultar compra individual</a>
+
+    <hr style="margin-right: 80%;">
+
+    {{#ingressos}}
+        <ul>
+            <li><b>id_compra</b>: {{_id}} <br>
+                <b>tipo_ingresso</b>: {{tipo}} <br> 
+                <b>quantidade_comprada</b>: {{quantidadeComprada}}
+            </li><br>
+        </ul>
+        <hr style="margin-right: 80%;">
+    {{/ingressos}} 
+
+    {{^ingressos}}
+        <p style="color: red;">Não há ingressos comprados por {{usuario.nome}}<p>
+    {{/ingressos}}
+
+    <a href="/usuario/login" style="text-decoration: none;">Voltar ao login</a><br>
+    <a href="/inicio" style="text-decoration: none;">Voltar ao início<a>    
+
+</body>
+</html>

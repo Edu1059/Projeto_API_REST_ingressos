@@ -10,26 +10,41 @@ class CompraController {
         return res.status(200).json(compras);
     }
 
-    async getIngressoByUsuario (req, res) {
+    async getIngressosByUsuario (req, res) {
         
-        const {id} = req.params;
-    
-        const usuarioExiste = await UsuarioModel.findOne({_id: id});
-    
-        if(!usuarioExiste) {
-            return res.status(404).json({msg: "Usuário não existe"});
+        try {
+            const {id} = req.params;
+
+            const ingressosUsuario = await CompraModel.find({id_comprador: id});
+            const usuario = await UsuarioModel.findById(id);
+
+            res.render("ingressos", {ingressos: ingressosUsuario, usuario: usuario});
+        } catch (error) {
+            res.status(500).json({msg: "Internal server error", error: error.message});
         }
-    
-        const ingressosUsuario = await CompraModel.find({id_comprador: id});
-    
-        return res.status(200).json(ingressosUsuario);
+    }
+
+    async getIngresso (req, res) {
+
+        try {
+            const {id} = req.body;     
+            
+            const compraIngresso = await CompraModel.findById(id);     
+            
+            if(compraIngresso) {
+                res.render("buscaIngresso", {ingresso: compraIngresso});
+            } else {
+                res.render("buscaIngresso", {message: "ID da compra não existe"});
+            }
+        } catch (error) {
+            res.status(500).json({msg: "Internal server error", error: error.message})
+        }
     }
 
     async createCompras (req, res) {
 
         try {
-            const {tipo, quantidadeComprada} = req.body;
-            const {id_comprador} = req.headers;
+            const {tipo, quantidadeComprada, id_comprador} = req.body;
 
             const tipoIngresso = await IngressoModel.findOne({nome: tipo});
             const compradorExiste = await UsuarioModel.findOne({_id: id_comprador});

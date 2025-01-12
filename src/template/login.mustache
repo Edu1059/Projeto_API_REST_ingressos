@@ -1,26 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
 </head>
 <body>
+
     <h2>Login de Usuário</h2>
 
     <form action="/usuario/login" method="POST">
         <label for="nome">Usuário:</label>
         <input type="text" id="nome" name="nome" required>
-        <br>
+        <br><br>
         <label for="senha">Senha:</label>
         <input type="password" id="senha" name="senha" required>
-        <br>
-        <label for="admin">Escolha suas opções:</label>
+        <br><br>
+        <label for="admin">Admin:</label>
         <select id="admin" name="admin">
             <option value="true">True</option>
             <option value="false">False</option>
         </select>
+        <br><br>
         <button type="submit">Entrar</button>
+        <br>
     </form>
 
     {{#logged}}
@@ -32,11 +33,14 @@
     {{/info}}
 
     {{#token}}
-        Token
+        Token de login<br>
         <textarea rows="5" cols="50">{{.}}</textarea>
+        <br>
+        <a href="/compra/busca/{{id}}" style="text-decoration: none;">Consultar todos os ingressos</a>
+        <br>
     {{/token}}
     
     <br>
-    <a href="/">Voltar</a>
+    <a href="/inicio" style="text-decoration: none;">Voltar</a>
 </body>
 </html>
