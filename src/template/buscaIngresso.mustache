@@ -8,9 +8,9 @@
     <h1>Busca ingresso</h1>
     <br>
 
-    <form action="/compra/busca/" method="POST">
+    <form action="/compra/busca" method="POST">
         <label for="id">Id compra:</label>
-        <input type="text" id="id" name="id" placeholder="Insira o ID do ingresso" required>
+        <input type="text" id="id" name="id" placeholder="Insira o ID da compra" required>
         <button type="submit">Consultar ingresso</button>
     </form>
     <br>
@@ -20,6 +20,8 @@
     {{#message}}
         {{.}}
         <hr style="margin-right: 80%;">
+        <br>
+        <a href="/compra/busca/{{ingresso.id_comprador}}" style="text-decoration: none;">Voltar aos ingressos</a><br>
         <br>
     {{/message}}
     

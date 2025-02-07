@@ -28,7 +28,7 @@ class UsuarioController {
                     senha: senha,
                     admin: admin
                 });
-
+                
                 const created = true
                 res.render("create", {message: "Cadastro de Usuário", created: created, nome: nome, senha: senha, admin: admin})
             }

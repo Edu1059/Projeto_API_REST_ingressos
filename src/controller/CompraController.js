@@ -57,6 +57,10 @@ class CompraController {
                 return res.status(400).json({msg: "Erro! Usuário comprador não existe"});
             }
 
+            if(quantidadeComprada <= 0) {
+                return res.status(400).json({msg: "ERRO! Não existe compra negativa"});
+            }
+
             if(quantidadeComprada <= tipoIngresso.quantidade && quantidadeComprada !== 0) {     
                 
                 const compraCriada = await CompraModel.create({
